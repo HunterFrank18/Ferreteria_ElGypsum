@@ -1,0 +1,152 @@
+@extends('layouts.admin')
+
+@section('content')
+
+<div class="container mt-4">
+
+<h2 class="mb-4">Productos</h2>
+
+
+@if(session('success'))
+
+<div class="alert alert-success">
+{{ session('success') }}
+</div>
+
+@endif
+
+
+<div class="d-flex justify-content-between mb-3">
+
+<a href="{{ route('admin.products.create') }}" class="btn btn-primary">
+Crear Producto
+</a>
+
+
+<form method="GET">
+
+<input type="text"
+name="search"
+value="{{ $search }}"
+placeholder="Buscar producto..."
+class="form-control">
+
+</form>
+
+</div>
+
+
+<div class="card shadow">
+
+<div class="table-responsive">
+
+<table class="table table-hover">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Imagen</th>
+<th>Nombre</th>
+<th>Categoría</th>
+<th>Precio</th>
+<th>Stock</th>
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+@foreach($products as $product)
+
+<tr>
+
+<td>
+
+@if($product->image)
+<img src="{{ asset('storage/'.$product->image) }}" style="height:50px">
+@else
+<img src="https://via.placeholder.com/50">
+@endif
+
+</td>
+
+<td>{{ $product->name }}</td>
+
+<td>{{ $product->category->name ?? 'Sin categoría' }}</td>
+
+<td>C$ {{ $product->price }}</td>
+
+<td>
+
+@if($product->stock <= 5)
+
+<span class="badge bg-danger">
+⚠ Stock Bajo ({{ $product->stock }})
+</span>
+
+@elseif($product->stock <= 10)
+
+<span class="badge bg-warning text-dark">
+Stock Medio ({{ $product->stock }})
+</span>
+
+@else
+
+<span class="badge bg-success">
+Stock OK ({{ $product->stock }})
+</span>
+
+@endif
+
+</td>
+
+<td>
+
+<a href="{{ route('admin.products.edit',$product->id) }}"
+class="btn btn-sm btn-warning">
+Editar
+</a>
+
+<form action="{{ route('admin.products.destroy',$product->id) }}"
+method="POST"
+class="d-inline form-delete">
+
+@csrf
+@method('DELETE')
+
+<button class="btn btn-sm btn-danger">
+Eliminar
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+@endforeach
+
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="mt-3">
+
+{{ $products->links() }}
+
+</div>
+
+
+</div>
+
+@endsection

@@ -1,0 +1,150 @@
+@font-face {
+    font-family: vt323;
+    src: url("VT323-Regular.ttf");
+ 
+    font-family: Special;
+    src: url("specialalphabetsp04.otf");
+}
+@font-face{
+    font-family: alfa;
+    src: url("AlfaSlabOne-Regular.ttf");
+}
+@font-face {
+    font-family: dyn;
+    src: url("Dynamo\ Regular.ttf");
+}
+@font-face{
+    font-family: sten;
+    src: url("STENCIL.TTF");
+}
+body{
+    box-sizing: border-box;
+    background: url("Fondos/ferreteria.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+header{
+    font-family: alfa;
+    text-align: center;
+    font-size: 30px;
+    text-shadow: 0 0 5px #ff7b00, 0 0 10px #00f0ff, 0 0 15px #021314, 0 0 20px #00f0ff;
+    text-transform: uppercase;
+    animation: flicker 1.5s infinite alternate;
+}
+.texto{
+font-family: Special;
+text-align: center;
+font-size: 25px;
+}
+
+.box{
+    float:left;
+    width: 400px;
+    background: rgba(0,0,0, .4);
+    margin: 0 auto;
+    margin-top: 3%;
+    padding: 10px;
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    margin-left: 5%;
+}
+.box-img{
+    border-radius: 20%;
+}
+.box h1{
+    font-size: 40px;
+    letter-spacing: 4px;
+    font-weight: 100;
+    margin: 30px 0 20px;
+    font-family: sten;
+
+}
+.box h2{
+    font-family: dyn;
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: 100;
+    margin-bottom:20px;
+}
+.box p {
+text-align:center;
+}
+
+.box ul{
+    
+    list-style: none;
+    margin-top: 20px;
+}
+.box ul li{
+display: inline-block;
+}
+.box ul li a{
+    font-family: dyn;
+    color:white;
+    font-size: 30px;
+    padding: 10px 5px;
+    display: block;
+    transition: all 0.5s ease-in-out;
+}
+.box ul li a:hover{
+    color: gold;
+    transform: scale(1.1);
+}
+
+.box1{
+    float:right;
+    width: 500px;
+    background: rgba(0,0,0, .4);
+    margin: 0 auto;
+    margin-top: 3%;
+    padding: 50px;
+    padding-bottom:60px;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+.box1-img{
+    border-radius: 30%;
+}
+.box1 h1{
+    font-family: sten;
+    font-size: 40px;
+    letter-spacing: 4px;
+    font-weight: 100;
+    margin: 30px 0 20px;
+}
+.box1 h2{
+    font-family: dyn;
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: 100;
+    margin-bottom:20px;
+}
+.box1 p {
+    font-family: dyn;
+text-align:center;
+}
+
+.box1 ul{
+    list-style: none;
+    margin-top: 20px;
+}
+.box1 ul li{
+display: inline-block;
+}
+.box1 ul li a{
+    color: gold;
+    font-size: 45px;
+    padding: 10px 5px;
+    display: block;
+    transition: all 0.5s ease-in-out;
+}
+.box1 ul li a:hover{
+    color: gold;
+    transform: scale(1.1);
+}

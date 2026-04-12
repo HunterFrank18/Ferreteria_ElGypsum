@@ -1,0 +1,173 @@
+@font-face {
+    font-family: vt323;
+    src: url("/ArteNica/Fonts/VT323-Regular.ttf");
+       font-family: blacos;
+    src: url("/ArteNica/Fonts/BlackOpsOne-Regular.ttf");
+}
+@font-face {
+    font-family: newSup;
+    src: url("/ArteNica/Fonts/NewSuperman-Pzd7.ttf"); 
+}
+@font-face{
+  font-family: alfa;
+    src: url("/ArteNica/Fonts/AlfaSlabOne-Regular.ttf");
+}
+@font-face {
+  
+    font-family: duna;
+    src: url("/ArteNica/Fonts/Dune_Rise.ttf");
+}
+
+@font-face {
+    font-family: dyn;
+    src: url("/ArteNica/Fonts/Dynamo.ttf");
+}
+.contenedor{
+    text-transform: uppercase;
+    animation: flicker 1.5s infinite alternate;
+    text-shadow: 0 0 5px #ff7b00, 0 0 10px #00f0ff, 0 0 15px #021314, 0 0 20px #00f0ff;
+     color: azure;
+    width: 100%;
+    font-family: blacos;
+    font-size: 30px;
+    text-align: center;
+   
+}
+
+body{
+ 
+       min-height: 100vh;
+      /*display:flex;*/
+    justify-content: flex-start;
+    align-items: center;
+   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url("/ArteNica/FondoPintura.jpg") no-repeat center center fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+   /* height: 100%;*/
+    padding: 0% 3%;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.conte{
+    width: 300px;
+    background: rgba(0, 0, 0, 0.4);
+    margin: 20px;
+ 
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+}
+.conte .card{
+    height: 100px;
+    width: 100%;
+    margin-bottom: 220px;
+    
+}
+.card img{
+   margin: auto;
+    display: block;
+}
+.conte img{
+    height: 300px;
+    width: 300px;
+
+
+}
+
+
+.informacion{
+    height: 100px;
+    width:110%;
+}
+.informacion h1{
+    font-family: blac;
+    font-size: 1.2em;
+    text-align: center;
+    color: blanchedalmond;
+  
+}
+.informacion p{
+    text-align: center;
+    font-family: vt323;
+    font-size: .9em;
+    color: white;
+}
+.precio{
+    height: 50px;
+    width: 85%;
+    margin: auto;
+    font-family: dynamo;
+    display: flex;
+    justify-content: space-between
+    ;
+    align-items: center;
+}
+.box-precio{
+    width: 100px; 
+}
+.precio1{
+    font-size: xx-large;
+}
+.precio2{
+    font-size: 1.5em;
+}
+.shopping{
+    font-size: 1.5em;
+    color: #555;
+
+}
+.conte a{
+    font-family: SAW;
+    border-radius: 9px;
+    text-decoration: none;
+    color: #f9f3f4;
+    font-weight: bold;
+    border: 3px solid;
+    padding: 7px 13px;
+}
+
+.conte a:hover{
+    color: #2196f3;
+}
+
+.precio2 a{
+    color: #f9f3f4;
+    font-weight: bold;
+}
+.tarjetas-pintura {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Espacio entre tarjetas */
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .conte {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .contenedor {
+        font-size: 22px;
+        padding: 10px;
+    }
+
+    .informacion h1 {
+        font-size: 1em;
+    }
+
+    .informacion p {
+        font-size: 0.85em;
+    }
+}
+

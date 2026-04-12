@@ -1,0 +1,184 @@
+@font-face {
+    
+    font-family: blac;
+    src: url("Fuentes/BlackOpsOne-Regular.ttf");
+}
+@font-face{
+    font-family: alfa;
+    src: url("Fuentes/AlfaSlabOne-Regular.ttf");
+}
+@font-face {
+    font-family: dyna;
+    src: url("Fuentes/Dynamo.ttf");
+}
+@font-face {
+    font-family: sten;
+    src: url("Fuentes/STENCIL.TTF");
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*cursor: pointer;*/
+}
+body{
+    width:100%;
+    height: 100%;
+    background: url("Fondos/ferreteria4.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: table;
+    margin: auto;
+    top: 0;
+    width: 100%;
+    vertical-align: middle;
+    display: table-cell;
+
+}
+nav{
+    color: antiquewhite;
+    max-width: 900px;
+    margin: auto;
+    background-color: none;
+    font-size: 20px;
+    margin-top: 0px;
+    font-family: blac;
+    margin-left: 30%;
+    
+}
+.menu-horizontal{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+.menu-horizontal > li > a{
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+.menu-horizontal li:hover{
+    background-color: red;
+}
+.menu-vertical{
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 300px;
+    background-color: none;
+}
+.menu-horizontal li:hover .menu-vertical{
+    display: block;
+}
+.menu-vertical li:hover{
+    background-color: black;
+}
+.menu-vertical li a{
+    display: block;
+    color: white;
+    padding: 15px 15px 15px 20px;
+    text-decoration: none;
+
+}
+
+#imagen{
+    float: left;
+    margin-right: 10%;
+    width: 50%;
+  
+  }
+  .parrafo {
+    text-align: center;
+    margin: 20px auto;
+    font-family: sten;
+    text-decoration: solid;
+   
+}
+
+.texto{
+max-width: 900px; 
+margin: 0 auto;
+color: aquamarine;
+ position: absolute;
+ top: 45%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ text-shadow: 4px 4px 4px #000;
+}
+
+  .footer{
+    background:none;
+    padding: 1em 0;
+    text-align: r;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+ 
+    text-decoration: black;
+}
+.containerr{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10%; 
+    margin: center;
+
+}
+ .footer-row{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+
+ }
+
+ .footer-links{
+       font-family: alfa;
+    text-align: center;
+    padding-left: 5%;
+    width: 30%;
+    padding: 0 15px;
+    color:white;
+    font-size: 20px;
+ }
+
+ .footer-links h4{
+    font-size: 20px;
+    color: black;
+    margin-bottom: 10px;
+    font-weight: 100;
+    border-bottom: 2px solid #00c3ff;
+    font-weight: bold;
+    /*padding-bottom: 10px;*/
+    display: inline-block;
+ }
+
+ .footer-links ul li a{
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 15px;
+    transition: all .3s ease;
+ }
+
+ .footer-links ul li a:hover{
+    color:black;
+    padding-left: 6px;
+    font-weight: bold;
+ }
+
+ .social-link a{
+display: inline-block;
+min-height: 40px;
+width: 40px;
+background-color: rgba(255,255,255,0.2);
+margin: 0 10px 10px 0;
+text-align: center;
+line-height: 40px;
+border-radius: 50%;
+color: black;
+transition: all .5s ease;
+ }
+ .social-link a:hover{
+    background-color:white;
+    transition: all .3s ease;
+ }

@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&family=Playfair&family=Tilt+Prism&display=swap');
+@font-face {
+    font-family: vt323;
+    src: url("/ArteNica/Fonts/VT323-Regular.ttf");
+       font-family: blacos;
+    src: url("/ArteNica/Fonts/BlackOpsOne-Regular.ttf");
+}
+@font-face {
+    font-family: newSup;
+    src: url("/ArteNica/Fonts/NewSuperman-Pzd7.ttf"); 
+}
+@font-face{
+  font-family: alfa;
+    src: url("/ArteNica/Fonts/AlfaSlabOne-Regular.ttf");
+}
+@font-face {
+  
+    font-family: duna;
+    src: url("/ArteNica/Fonts/Dune_Rise.ttf");
+}
+
+@font-face {
+    font-family: dyn;
+    src: url("/ArteNica/Fonts/Dynamo.ttf");
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*cursor: pointer;*/
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    width: 65%;
+    margin: 0 auto;
+    background: url("active-green-volcano-in-nicaragua-9whz237l2pd6cgbw.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+nav{
+    color: antiquewhite;
+    max-width: 900px;
+    margin: auto;
+    background-color: none;
+    font-size: 20px;
+    margin-top: 0px;
+    font-family: blacos;
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+    
+}
+.menu-horizontal{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+.menu-horizontal > li > a{
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+.menu-horizontal li:hover{
+    opacity: 0.5;
+    
+}
+.menu-vertical{
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 300px;
+    background-color: none;
+}
+.menu-horizontal li:hover .menu-vertical{
+    display: block;
+}
+.menu-vertical li:hover{
+    background-color: black;
+}
+.menu-vertical li a{
+    display: block;
+    color: white;
+    padding: 15px 15px 15px 20px;
+    text-decoration:wavy;
+
+}
+.header{
+    margin-bottom: 1em;
+    padding: 1em 0;
+    width: 100%;
+    max-width: 900px;
+    height: 120px;
+    top: 0;left: 0;
+    margin-bottom: 1em;
+    background-color:none;
+    text-align: center;
+    font-size: 10px;
+   font-family: blacos;
+
+ 
+}
+
+  
+.bienvenida{
+text-align: center;
+color:rgba(0,0,0, .9);
+font-weight: 400;
+font-size: 20px;
+margin-left: 0;
+  font-family: duna;
+margin-top: 20px;
+}
+
+.parrafo {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.texto{
+max-width: 900px; /* Ajusta el ancho máximo según sea necesario */
+margin: 0 auto;
+ color:#fff;
+ position: absolute;
+ top: 45%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ text-shadow: 2px 2px 4px #000;
+}
+
+.tarjetas-galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.tarjeta {
+  width: 250px;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  font-size: 24px;
+  font-family: alfa;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(255, 255, 255, 0.3);
+}
+

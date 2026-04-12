@@ -1,0 +1,240 @@
+@font-face {
+ font-family: 'blac';
+    src: url('/fonts/BlackOpsOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: dynamo;
+    src: url('/fonts/Dynamo.ttf');
+}
+@font-face {
+    font-family: alfa;
+    src: url('fonts/AlfaSlabOne-Regular.ttf');
+}
+
+
+.contenedor{
+    text-transform: uppercase;
+    animation: flicker 1.5s infinite alternate;
+    text-shadow: 0 0 5px #ff7b00, 0 0 10px #00f0ff, 0 0 15px #021314, 0 0 20px #00f0ff;
+     color: azure;
+    width: 100%;
+    font-family:alfa;
+    font-size: 35px;
+    text-align: center;
+
+}
+body{
+    font-family: alfa;
+    align-items: center;
+    background-image: url("ferreteria2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0% 5%;
+    margin: 0%;
+}
+.conte{
+    float:left;
+    width: 400px;
+    background: rgba(0,0,0, .4);
+    margin: 0 auto;
+    margin-top: 4%;
+    padding: 30px;
+    color: white;
+    border-radius: 15px;
+    align-items: center;
+}
+.conte .card{
+    height: 100px;
+    width: 100%;
+    margin-bottom: 250px;
+}
+.card img{
+    margin: auto;
+    display: block;
+}
+.Mariow img{
+    height: 330px;
+    width: 330px;
+}
+.conte .Mariow{
+    background-color: #111;
+}
+.conte .Mario64{
+    background-color: #6a0c0b;
+}
+.conte .super{
+    background-color: #111;
+}
+.conte .Mario64 img{
+    height: 200px;
+    width: 300px;
+}
+.conte .super img{
+    height: 330px;
+    width: 300px;
+}
+.informacion{
+    height: 100px;
+    width:100%;
+}
+.informacion h1{
+    font-family: blac;
+    font-size: 1.2em;
+    text-align: center;
+    color: blanchedalmond;
+
+}
+.informacion p{
+    text-align: center;
+    font-family: alfa;
+    font-size: .9em;
+    color: white;
+}
+.precio{
+    height: 50px;
+    width: 85%;
+    margin: auto;
+    font-family: alfa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.box-precio{
+    width: 100px;
+}
+.precio1{
+    font-size: xx-large;
+}
+.precio2{
+    font-size: 1.5em;
+}
+.shopping{
+    font-size: 1.5em;
+    color: #555;
+
+}
+.conte a{
+    font-family: blac;
+    border-radius: 9px;
+    text-decoration: none;
+    color: #f9f3f4;
+    font-weight: bold;
+    border: 3px solid;
+    padding: 7px 13px;
+}
+
+.conte a:hover{
+    color: #2196f3;
+}
+
+.precio2 a{
+    color: #f9f3f4;
+    font-weight: bold;
+}
+
+.conte1{
+    float:right;
+    width: 400px;
+    background: rgba(0,0,0, .4);
+    margin: 0 auto;
+    margin-top: 4%;
+    padding: 30px;
+    color: white;
+    border-radius: 15px;
+    align-items: center;
+}
+.conte .card{
+    height: 100px;
+    width: 100%;
+    margin-bottom: 250px;
+}
+.card img{
+    margin: auto;
+    display: block;
+}
+.Mariow img{
+    height: 330px;
+    width: 330px;
+}
+.conte .Mariow{
+    background-color: #111;
+}
+.conte .Mario64{
+    background-color: #6a0c0b;
+}
+.conte .super{
+    background-color: #111;
+}
+.conte .Mario64 img{
+    height: 200px;
+    width: 300px;
+}
+.conte .super img{
+    height: 330px;
+    width: 300px;
+}
+.informacion{
+    height: 100px;
+    width:100%;
+}
+.informacion h1{
+    font-family: blac;
+    font-size: 1.2em;
+    text-align: center;
+    color: blanchedalmond;
+
+}
+.informacion p{
+    text-align: center;
+    font-family: dynamo;
+    font-size: .9em;
+    color: white;
+}
+.precio{
+    height: 50px;
+    width: 85%;
+    margin: auto;
+    font-family: dynamo;
+    display: flex;
+    justify-content: space-between
+    ;
+    align-items: center;
+}
+.box-precio{
+    width: 100px;
+}
+.precio1{
+    font-size: xx-large;
+}
+.precio2{
+    font-size: 1.5em;
+}
+.shopping{
+    font-size: 1.5em;
+    color: #555;
+
+}
+.conte a{
+    font-family: SAW;
+    border-radius: 9px;
+    text-decoration: none;
+    color: #f9f3f4;
+    font-weight: bold;
+    border: 3px solid;
+    padding: 7px 13px;
+}
+
+.conte a:hover{
+    color: #2196f3;
+}
+
+.precio2 a{
+    color: #f9f3f4;
+    font-weight: bold;
+}
+

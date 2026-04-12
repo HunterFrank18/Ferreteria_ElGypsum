@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&family=Nanum+Myeongjo:wght@700&family=Playfair&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Handjet:wght@300&family=Nanum+Myeongjo:wght@700&family=Playfair&family=Tilt+Prism&display=swap');
+*{
+    margin: 0%;
+    padding: 0;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+
+body{
+    background: url("futuristic-technological-grid-background-digital-futurist-cyber-space-design-cyberpunk-technology-virtual-reality-science-fiction-matrix-science-light-perspective-wallpaper-illust.jpg");
+    background:cover;
+    background-size: 100vw 100vh;
+    position: relative;
+    margin: 0%;
+    min-height: 100vh;
+    text-transform: capitalize;
+}
+
+.container{
+    text-align: center;
+    text-shadow: white;
+    padding-bottom: 2%;
+    margin-top:0;
+    color: white;
+    font-family: 'Playfair', serif;
+    font-family: 'Tilt Prism', cursive;
+    font-size: 50px;
+}
+
+.form-register{
+    opacity: 80%;
+    width: 400px;
+    background: url("partiuclas.jpg");
+    padding: 20px;
+    margin:auto;
+    border-radius: 4px;
+    font-family: 'Times New Roman', Times, serif;
+    color: blanchedalmond;
+    box-shadow: 7px 13px 37px wheat;
+    bottom: 10px;
+}
+
+.form-register h4{
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: white;
+
+}
+
+.controls{
+    width: 100%;
+    background: #24303c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid white;
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 18px;
+    color: white;
+}
+
+.form-register p{
+    
+    height: 40px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+ 
+}
+ 
+.form-register a{
+    color:white;
+    text-decoration: none;
+}
+.form-register a:hover{
+    color:white;
+    text-decoration: underline;
+}
+
+.form-register .botons{
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    padding: 12px;
+    color: white;
+    font-size: 16px;
+    margin: 16px 0px;
+}
+
+
+@media(max-width:1200px){
+    .form-register{
+        text-align: center;
+    }
+
+
+    .footer{
+        width: 1200%;
+        margin-bottom: 50px;
+    }
+ }

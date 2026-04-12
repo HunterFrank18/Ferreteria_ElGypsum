@@ -1,0 +1,85 @@
+body {
+	margin-left: 15%;
+	font-family: Verdana;
+	width: 80%;
+	color: #605B56;
+	margin: auto;
+	border-radius: 6px;
+	border: 6px;
+	min-height: 100vh;
+	background-size: cover;
+	box-sizing: border-box;
+	background: url("Parque.jpg");
+	background-size: cover;
+}
+
+header{
+padding: 3px 10px;
+margin-bottom: 5px;
+border-radius: 10px;
+}
+
+header h1{
+padding-left: 10px;
+padding: 3px 10px;
+margin-bottom: 5px;
+border-radius: 10px;
+background: -webkit-linear-gradient(left, #5CA861 , #BADFBC);
+background: -o-linear-gradient(right, #5CA861 , #BADFBC);
+background: -moz-linear-gradient(right, #5CA861 , #BADFBC);
+background: linear-gradient(to right, #5CA861 , #BADFBC);
+}
+
+#menu-principal ul {
+	float: left;
+	width: 200px;
+	padding: 0;
+	margin: 0;
+}
+
+#menu-principal ul li {
+	padding: 10px;
+	list-style-type: none;
+}
+
+#contenido {
+	margin-left: 200px;
+	padding: 10px;
+	color: black;
+}
+
+footer {
+	border-top: solid 2px #605B56;
+	/*padding-top: 10px;
+	margin-top: 15px;
+	text-align: center;*/
+    color: black;
+    width: 70%;
+ 
+    text-align: center;
+    align-self: flex-end;
+    bottom: 0;
+    position: absolute;
+    font-size: 20px;
+}
+#contenido{
+	background-image: url("imagen3.jpg");
+	background-size: cover;
+	border-radius: 6px;
+	border: 2px solid #605B56
+}
+#contenido p img {
+	float: right;
+	border: #605B56 2px;
+	margin: 3px;
+	border-radius: 4px;
+}
+
+#menu-principal li a{
+	color: aliceblue;
+	text-decoration: none;
+	text-align: center;
+}
+#menu-principal li a:hover{
+	color: aqua;
+}

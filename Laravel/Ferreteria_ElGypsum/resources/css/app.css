@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font and background for the project */
+@font-face {
+	font-family: 'StencilCustom';
+	src: url('/fonts/STENCIL.TTF') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@layer base {
+	:root { --site-font: 'StencilCustom', var(--font-sans); }
+	body.site-font { font-family: var(--site-font); }
+}
+
+@layer components {
+	.bg-ferreteria {
+		background-image: url('/Fondos/ferreteria18.jpg');
+		background-size: cover;
+		background-position: center;
+	}
+
+	.auth-card {
+		@apply bg-white/80 p-8 rounded-lg shadow-lg w-full max-w-md;
+	}
+
+	.admin-panel {
+		@apply bg-white/90 p-6 rounded-lg shadow;
+	}
+
+	.list-group-item-custom {
+		@apply block px-4 py-3 hover:bg-gray-100 rounded;
+	}
+}
