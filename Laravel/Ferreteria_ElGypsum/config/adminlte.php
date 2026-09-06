@@ -327,7 +327,7 @@ return [
            // 'label' => 4,
           //  'label_color' => 'success',
         ],
-        ['header' => '--PANEL-'],
+        ['header' => '--PANEL--'],
 
         [
             'text' =>  'Inventario',
@@ -377,22 +377,28 @@ return [
 
         ],
 
-        ['header' => 'labels'],
+        ['header' => 'Solicitudes'],
         [
-            'text' => 'important',
+            'text' => 'Bandeja general',
             'icon_color' => 'red',
-            'url' => '#',
+            'url' => 'admin/solicitudes',
         ],
         [
-            'text' => 'warning',
+            'text' => 'Apartados',
             'icon_color' => 'yellow',
-            'url' => '#',
+            'url' => 'admin/solicitudes?tipo=apartado',
         ],
         [
-            'text' => 'information',
+            'text' => 'Cotizaciones',
             'icon_color' => 'cyan',
-            'url' => '#',
+            'url' => 'admin/solicitudes?tipo=cotizacion',
         ],
+        [
+            'text' => 'Roles',
+            'icon_color' => 'purple',
+            'url' => 'admin/users/roles',
+        ],
+
     ],
 
     /*

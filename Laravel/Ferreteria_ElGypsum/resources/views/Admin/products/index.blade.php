@@ -78,36 +78,39 @@ class="form-control">
 
 <td>{{ $product->category->name ?? 'Sin categoría' }}</td>
 
-<td>C$ {{ $product->price }}</td>
+<td>
+    @if($product->variants->count())
+        C$ {{ number_format($product->variants->min('price'), 2) }}
+        @if($product->variants->count() > 1)
+            - C$ {{ number_format($product->variants->max('price'), 2) }}
+        @endif
+    @else
+        C$ {{ number_format($product->price, 2) }}
+    @endif
+</td>
 
 <td>
+    @php
+        $stock = $product->variants->count() ? $product->variants->sum('stock') : $product->stock;
+    @endphp
 
-@if($product->stock <= 5)
-
-<span class="badge bg-danger">
-⚠ Stock Bajo ({{ $product->stock }})
-</span>
-
-@elseif($product->stock <= 10)
-
-<span class="badge bg-warning text-dark">
-Stock Medio ({{ $product->stock }})
-</span>
-
-@else
-
-<span class="badge bg-success">
-Stock OK ({{ $product->stock }})
-</span>
-
-@endif
-
+    @if($stock <= 0)
+        <span class="badge bg-danger">Sin stock ({{ $stock }})</span>
+    @elseif($stock <= 5)
+        <span class="badge bg-danger">⚠ Stock Bajo ({{ $stock }})</span>
+    @elseif($stock <= 10)
+        <span class="badge bg-warning text-dark">Stock Medio ({{ $stock }})</span>
+    @else
+        <span class="badge bg-success">Stock OK ({{ $stock }})</span>
+    @endif
 </td>
 
 <td>
 
-<a href="{{ route('admin.products.edit',$product->id) }}"
-class="btn btn-sm btn-warning">
+<a href="{{ route('admin.variants.index', ['product_id' => $product->id]) }}" class="btn btn-sm btn-info">
+Variantes
+</a>
+<a href="{{ route('admin.products.edit',$product->id) }}" class="btn btn-sm btn-warning">
 Editar
 </a>
 

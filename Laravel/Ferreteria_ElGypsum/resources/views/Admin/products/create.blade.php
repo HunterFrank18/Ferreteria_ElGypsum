@@ -45,11 +45,13 @@
 <div class="col-md-4 mb-3">
 <label class="form-label">Precio</label>
 <input type="number" name="price" step="0.01" class="form-control">
+<div class="form-text text-muted">Este valor es solo referencia. Si el producto tiene marcas/variantes, el precio real se gestiona en Variantes.</div>
 </div>
 
 <div class="col-md-4 mb-3">
 <label class="form-label">Stock</label>
 <input type="number" name="stock" class="form-control">
+<div class="form-text text-muted">Este stock es general. Las cantidades por marca se administran en Variantes.</div>
 </div>
 
 <div class="col-md-4 mb-3">

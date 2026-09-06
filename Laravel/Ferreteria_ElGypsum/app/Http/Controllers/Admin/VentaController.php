@@ -34,51 +34,90 @@ class VentaController extends Controller
 }
 public function pos()
 {
-    $variants = ProductVariant::with('product','brand')
-        ->where('stock','>',0)
-        ->get();
+    $products = Product::whereHas('variants', function ($query) {
+        $query->where('stock', '>', 0);
+    })
+    ->with(['variants' => function ($q) {
+        $q->where('stock', '>', 0);
+    }, 'variants.brand'])
+    ->get();
 
     $clientes = Cliente::where('estado','activo')->get();
 
-    return view('admin.ventas.pos', compact('variants','clientes'));
+    return view('admin.ventas.pos', compact('products','clientes'));
 }
 
 public function storePOS(Request $request)
 {
-
-if($request->tipo_pago == 'credito' && !$request->cliente_id){
-    throw new \Exception("Debe seleccionar cliente para crédito");
-}
-
     DB::beginTransaction();
 
     try {
 
+        if($request->tipo_pago == 'credito' && !$request->cliente_id){
+            throw new \Exception("Debe seleccionar cliente para crédito");
+        }
+
+        $cliente = Cliente::find($request->cliente_id);
+
+if($request->tipo_pago == 'credito'){
+
+    if(!$cliente){
+        return response()->json(['error' => 'Debe seleccionar cliente']);
+    }
+
+    $deudaActual = $cliente->deuda;
+
+    if($deudaActual + $request->total > $cliente->limite_credito){
+        return response()->json([
+            'error' => 'Cliente supera su límite de crédito'
+        ]);
+    }
+}
+
         $venta = Venta::create([
             'numero_factura' => 'FAC-'.Str::upper(Str::random(6)),
-            'user_id' => auth()->id(),
+            'user_id' => auth()->user()->id,
             'cliente_id' => $request->cliente_id,
             'tipo_pago' => $request->tipo_pago,
             'subtotal' => $request->subtotal,
             'impuesto' => 0,
             'total' => $request->total,
-            'estado' => 'emitida'
+            'estado' => $request->tipo_pago == 'contado' ? 'pagada' : 'pendiente',
+            'fecha'  => now()
         ]);
 
         foreach ($request->productos as $item) {
 
             $variant = ProductVariant::findOrFail($item['id']);
 
+           $variant = ProductVariant::with(['product', 'brand'])->findOrFail($item['id']);
+
             VentaDetalle::create([
                 'venta_id' => $venta->id,
                 'product_variant_id' => $variant->id,
+                'product_name' => $variant->product->name ?? 'Producto sin nombre',
+                'brand_name' => $variant->brand->name ?? 'Sin marca',
+                'presentation' => $variant->presentation,
+                'sku' => $variant->sku,
                 'cantidad' => $item['cantidad'],
                 'precio_unitario' => $variant->price,
                 'subtotal' => $item['cantidad'] * $variant->price
             ]);
 
-            // 🔥 descontar stock
+
             $variant->decrement('stock', $item['cantidad']);
+        }
+
+        // 🔥 CONTADO → PAGO AUTOMÁTICO
+        if($venta->tipo_pago == 'contado'){
+            \App\Models\Pago::create([
+                'venta_id' => $venta->id,
+                'monto' => $venta->total,
+                'metodo' => 'efectivo',
+                'fecha_pago' => now()
+            ]);
+
+            $venta->update(['estado' => 'pagada']);
         }
 
         DB::commit();
@@ -87,7 +126,9 @@ if($request->tipo_pago == 'credito' && !$request->cliente_id){
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return response()->json(['error' => $e->getMessage()]);
+        return response()->json([
+            'error' => $e->getMessage()
+        ]);
     }
 }
 

@@ -14,13 +14,11 @@ class ProductController extends Controller
 
         $search = $request->search;
 
-        $products = Product::with('category')
-
-        ->when($search, function ($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })
-
-        ->paginate(10);
+        $products = Product::with(['category','variants'])
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            })
+            ->paginate(10);
 
         return view('admin.products.index', compact('products','search'));
     }

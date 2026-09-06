@@ -1,1171 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baño | Ferreteria</title>
+
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-     <!-- <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}"> -->
- <link rel="stylesheet" href="{{ asset('css/bano.css') }}">
-    <title>Bienvenido a la categoria Baño</title>
+    <link rel="stylesheet" href="{{ asset('css/bano.css') }}">
 </head>
-
 <body>
+@php
+    $whatsapp = 'https://wa.me/505865023595';
+@endphp
 
-<style>
-        body {
-            background: url("{{ asset('Fondos/ferreteria16.jpg') }}");
-            min-height: 100vh;
-            width: 100%;
-            background-size: contain;
-            background-repeat: repeat-y;
-
-       }
-       .pricing-header{
-        color: antiquewhite;
-       }
-    </style>
-
-    <header>
+<header class="store-header">
+    <div class="top-line">
         <div class="container">
-            <div class="row align-items-stretch justify-content-between">
-                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                    <a class="navbar-brand" href="{{ url('/index') }}">Ferreteria El Gypsum  <i class="fa-solid fa-shower" style="color: #63E6BE;"></i></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+            <span><i class="fa-solid fa-shower"></i> Categoria Baño</span>
+            <span><i class="fa-solid fa-cart-shopping"></i> Selecciona marca y agrega al carrito</span>
+        </div>
+    </div>
+
+    <nav class="catalog-nav">
+        <div class="container">
+            <a class="brand" href="{{ url('/') }}">
+                <span><i class="fa-solid fa-shower"></i></span>
+                Ferreteria El Gypsum
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ url('/') }}">Inicio</a>
+                <a class="active" href="{{ url('/bano') }}">Baño</a>
+                <a href="{{ url('/compra') }}">Compra</a>
+            </div>
+
+            <div class="dropdown" id="carrito">
+                <button class="cart-button dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-cart-shopping"></i> Carrito
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-right cart-dropdown">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-2" id="lista-carrito">
+                            <thead>
+                                <tr>
+                                    <th>Img</th>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <button id="vaciar-carrito" class="btn btn-outline-danger btn-sm btn-block" type="button">
+                        Vaciar carrito
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <img src="{{ asset('img/cart.jpeg') }}" class="nav-link dropdown-toggle img-fluid" height="70px"
-                                    width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false"></img>
-                                <div id="carrito" class="dropdown-menu" aria-labelledby="navbarCollapse">
-                                    <table id="lista-carrito" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Imagen</th>
-                                                <th>Nombre</th>
-                                                <th>Precio</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
+                    <button id="procesar-pedido" class="btn btn-success btn-sm btn-block" type="button">
+                        Procesar compra
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
 
+<main id="lista-productos">
+    <section class="hero-bath">
+        <div class="container">
+            <div class="hero-content">
+                <span class="section-kicker"><i class="fa-solid fa-faucet-drip"></i> Baño</span>
+                <h1>Accesorios y repuestos para baño con marcas disponibles.</h1>
+                <p>Escoge la marca o variante, revisa precio y stock, y agregalo directo al carrito.</p>
+                <a class="btn-primary-store" href="#productos">
+                    Ver productos
+                </a>
+            </div>
+        </div>
+    </section>
 
-                                    <a href="#" id="vaciar-carrito" class="btn btn-primary btn-block">Vaciar Carrito</a>
-                                    <a href="#" id="procesar-pedido" class="btn btn-danger btn-block">Procesar
-                                        Compra</a>
+    <section id="productos" class="catalog-section">
+        <div class="container">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker"><i class="fa-solid fa-layer-group"></i> Catalogo de baño</span>
+                    <h2>Productos para baño</h2>
+                    <p>Un card por producto, con marcas, precios y stock desde la base de datos.</p>
+                </div>
 
+                <a class="btn-outline-store" href="{{ url('/') }}">
+                    <i class="fa-solid fa-house"></i> Volver al inicio
+                </a>
+            </div>
 
+            <div class="product-grid">
+                @forelse ($productos as $producto)
+                    @php
+                        $image = $producto->image
+                            ? asset('storage/' . $producto->image)
+                            : asset('Fondos/ferreteria16.jpg');
+
+                        $variantes = $producto->variants->map(function ($variant) use ($producto, $image) {
+                            return [
+                                'id' => $variant->id,
+                                'brand' => optional($variant->brand)->name ?? 'Sin marca',
+                                'price' => number_format($variant->price, 2, '.', ''),
+                                'stock' => (int) $variant->stock,
+                                'sku' => $variant->sku ?? 'N/A',
+                                'title' => $producto->name . ' - ' . (optional($variant->brand)->name ?? 'Sin marca'),
+                                'image' => $image,
+                            ];
+                        })->values();
+
+                        $primera = $variantes->first();
+                    @endphp
+
+                    <article class="product-card" data-product-card>
+                        <a class="product-image" href="{{ $whatsapp }}">
+                            <img
+                                src="{{ $image }}"
+                                alt="{{ $producto->name }}"
+                                onerror="this.onerror=null; this.src='{{ asset('Fondos/ferreteria16.jpg') }}';"
+                            >
+                            <span class="product-badge">Baño</span>
+                        </a>
+
+                        <div class="product-info">
+                            <span class="product-category">{{ optional($producto->category)->name ?? 'Baño' }}</span>
+                            <h3>{{ $producto->name }}</h3>
+                            <p>{{ $producto->description ?? 'Producto disponible en diferentes marcas. Selecciona una opcion para ver precio y stock.' }}</p>
+
+                            <label class="variant-label" for="variant-{{ $producto->id }}">Marca disponible</label>
+                            <select
+                                id="variant-{{ $producto->id }}"
+                                class="variant-select"
+                                data-variants='@json($variantes)'
+                            >
+                                @foreach ($producto->variants as $variant)
+                                    <option value="{{ $variant->id }}">
+                                        {{ optional($variant->brand)->name ?? 'Sin marca' }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <div class="variant-details">
+                                <div>
+                                    <span>Precio</span>
+                                    <strong class="variant-price">C$ {{ $primera['price'] ?? '0.00' }}</strong>
                                 </div>
-                            </li>
-                        </ul>
+                                <div>
+                                    <span>Stock</span>
+                                    <strong class="variant-stock">{{ $primera['stock'] ?? 0 }} disponible</strong>
+                                </div>
+                                <div>
+                                    <span>SKU</span>
+                                    <strong class="variant-sku">{{ $primera['sku'] ?? 'N/A' }}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-footer">
+                            <button
+                                type="button"
+                                class="add-cart-button agregar-carrito"
+                                data-id="{{ $primera['id'] ?? '' }}"
+                                data-titulo="{{ $primera['title'] ?? $producto->name }}"
+                                data-precio="{{ $primera['price'] ?? '0.00' }}"
+                                data-imagen="{{ $image }}"
+                            >
+                                Agregar al carrito
+                            </button>
+
+                            <a class="whatsapp-button" href="{{ $whatsapp }}" aria-label="Cotizar {{ $producto->name }}">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </article>
+                @empty
+                    <div class="empty-state">
+                        <i class="fa-solid fa-shower"></i>
+                        <h3>Aun no hay productos de baño</h3>
+                        <p>Cuando agregues productos activos con stock en la categoria Baño, apareceran automaticamente aqui.</p>
                     </div>
-                </nav>
+                @endforelse
             </div>
         </div>
-    </header>
-
-    <main>
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 my-4 mx-auto text-center">
-            <h1 class="display-4 mt-4">Lista de Productos</h1>
-            <p class="lead">Selecciona uno de nuestros productos y accede a un descuento</p>
-        </div>
-
-        <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Asiento Alargado</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/asiento_alargado.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>AQUAFINA</li>
-                            <li>FOSET</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Asiento Redondo</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/asiento_normal.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>AQUAFINA</li>
-                            <li>FOSET</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Barra de Seguridad</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/barra_seguridad.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>BOXER</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Boya Tanque de Agua</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/BOYA-TANGUE-DE-AGUA-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>GENERICO</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Brazo para Ducha</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/BRAZO-PARA-DUCHA-LORENZETTY-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>AQUAFINA</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Cepillo Para Inodoro</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/cepillo_inodoro.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GENERICO</li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Cinta de Teflon</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/CINTA-TEFLON-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>3M</li>
-                            <li>COFLEX</li>
-                            <li>GENERICO</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Coladera Metal Cuadrada</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/coladera_metal.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>BOXER TOOLS</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Coladera Metal Cuadrada Negra</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/coladera_negra.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>BOXER TOOLS</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Coladera Desague Redonda</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/COLADERA-DE-DESAGUE-3-FOSET-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>FOSET</li>
-                            <li>GRIVEN</li>
-                            <li>AQUAFINA</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Desatorador de Inodoro</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/destapador_inodoro.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>DEMONIO ROJO</li>
-                            <li>FURIOSO</li>
-                            <li>EL DRAGON</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Destaqueador de Inodoro</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/DESTAQUEADOR-DE-INODOROS-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GENERICO</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Ducha Cromada</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/ducha_cromada.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>BOXER TOOLS</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Ducha Electrica</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/ducha_electrica.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Ducha Metalica Con Brazo</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/DUCHA-METALICA-CON-BRAZO-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-        <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Empaque De Cera</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/EMPAQUE-CERA-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Espuma De Polyuretano Expansiva</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/ESPUMA-DE-POLYURETANO-EXPANSIVA-LANCO-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>LANCO</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Flange de Inodoro</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/FLANGE-INODORO-COFLEX-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>COFLEX</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-
-        <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Flotador Electrico</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/FLOTADOR-ELECTRO-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>FOSET</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Inodoro Aldosa</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/Inodoro_Aldosa.jpeg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>ALDOSA</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Inodoro de Push</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/Inodoro_Push.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Inodoro Standard</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/Inodoro_ecoline.png') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>ECOLINE</li>
-                            <li>INCESA STANDARD</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tornillos De Tanque de Inodoro</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/JUEGO-TORNILLOS-PARA-INODORO-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>COFLEX</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Kit De Inodoro Cato</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/KIT_CATO.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>CATO</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Kit de Inodoro Standard</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/kit_inodoro.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>AQUAFINA</li>
-                            <li>GRIVEN</li>
-                            <li>COFLEX</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Kit De Inodoro Push</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/KIT-INODORO de push.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Lavamano</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/LAVAMANO.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>ECOLINE</li>
-                            <li>ASTRA</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-        <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Pase Metalica</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/llave_pase_emt.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Abasto Doble Para Pantry</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/LLAVE-ABASTO-ANGULAR-DOBLE-PANTRY-BRASSCRAFT-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>FOSET</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Angulo Sencilla Lavamano</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/LLAVE-ABASTO-ANGULAR-LAVAMANO-BRASSCRAFT-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>FOSET</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Campana Para Ducha</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/LLAVE-PARA-DUCHA-CAMPANA-GRVEN-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Ducha Cruzeta</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/LLAVE-PARA-DUCHA-CRUZETA-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Manecilla Para Inodoro</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/MANECILLA.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>FOSET</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Manguera De Inodoro</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/manguera_inodoro.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>COFLEX</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Manguera De Lavamano</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/MANGUERA-LAVABO-FREGADERO-VINIL-COFLEX-1-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>COFLEX</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Manguera Doble Para Lavamano/Pantry</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/MANGUERA-T-LAVABO-FREGADERO-COFLEX-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>COFLEX</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-        <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Trampa Para Pantry</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/PANTRY-TRAMPA-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Pegamento PVC Durman</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/PEGAMENTO-PVC-DURMAN_1octavo.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/16</li>
-                            <li>1/32</li>
-                            <li>1/8</li>
-                            <li>1/4</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Pera Rana</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/pera_rana.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Regadera Cuadrada</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/regadera_cuadrada_aquafina.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>AQUAFINA</li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Regadera Redonda</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/regadera_redonda_aquafina.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>AQUAFINA</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Sonda Para Destaquear</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/sonda.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Soporte Para Lavamano</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/SOPORTE-PARA-LAVAMANO-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Trampa De Desague</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/trampa_desague.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Trampa Flexible Lavamano</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/TRAMPA-FLEXIBLE-LAVAMANO-FOSET-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>FOSET</li>
-                            <li>GRIVEN</li>
-
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-
-        <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Trampa De Lavamano Cromada</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/TRAMPA-LAVAMANO-CROMADA-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>FOSET</li>
-                            <li>GRIVEN</li>
-                            <li>AQUAFINA</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tubo Potable PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/TUBO-AGUA-POTABLE-PVC.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                            <li>2"</li>
-                            <li>3"</li>
-                            <li>4"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Union de Tope</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/union_tope.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>DURMAN</li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Union Maleable</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/UNION-DE-REPARACION-PVC-1-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Pase Plastica</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/VALVULA-BOLA-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Check Horizontal</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/VALVULA-CHECK-HORIZONTAL-1-2-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Llave Check Vertical</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/VALVULA-CHECK-VERTICAL-TRUPER-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Trampa De Desague</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/trampa_desague.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Trampa Flexible Lavamano</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('Baño/TRAMPA-FLEXIBLE-LAVAMANO-FOSET-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>FOSET</li>
-                            <li>GRIVEN</li>
-
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-    </main>
-
-       <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('js/sweetalert2.min.js')}}"></script>
-    <script src="{{ asset('js/carrito.js')}}"></script>
-    <script src="{{ asset('js/pedido.js')}}"></script>
-
-
+    </section>
+</main>
+
+<script>
+    const whatsappBase = @json($whatsapp);
+
+    function updateVariantCard(card) {
+        const select = card.querySelector('.variant-select');
+        const price = card.querySelector('.variant-price');
+        const stock = card.querySelector('.variant-stock');
+        const sku = card.querySelector('.variant-sku');
+        const addButton = card.querySelector('.agregar-carrito');
+        const whatsapp = card.querySelector('.whatsapp-button');
+
+        const variants = JSON.parse(select.dataset.variants || '[]');
+        const selected = variants.find(variant => String(variant.id) === String(select.value));
+
+        if (!selected) return;
+
+        price.textContent = 'C$ ' + selected.price;
+        stock.textContent = selected.stock + ' disponible';
+        sku.textContent = selected.sku || 'N/A';
+
+        addButton.dataset.id = selected.id;
+        addButton.dataset.titulo = selected.title;
+        addButton.dataset.precio = selected.price;
+        addButton.dataset.imagen = selected.image;
+
+        const message = `Hola, quiero cotizar: ${selected.title}. Precio mostrado: C$ ${selected.price}. SKU: ${selected.sku || 'N/A'}`;
+        whatsapp.href = whatsappBase + '?text=' + encodeURIComponent(message);
+    }
+
+    document.querySelectorAll('[data-product-card]').forEach(card => {
+        updateVariantCard(card);
+
+        const select = card.querySelector('.variant-select');
+        select.addEventListener('change', () => updateVariantCard(card));
+    });
+</script>
+
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('js/carrito.js') }}"></script>
+<script src="{{ asset('js/pedido.js') }}"></script>
 </body>
-
 </html>

@@ -1,848 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-   <script src="{{ asset('js/popper.min.js') }}"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plomeria | Ferreteria</title>
+
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <!-- <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}"> -->
-    <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/plomeria.css') }}">
-    <title>Bienvenido a la categoria Plomeria</title>
 </head>
-
 <body>
+@php
+    $whatsapp = 'https://wa.me/505865023595';
+@endphp
 
-<style>
-        body {
-            background: url("{{ asset('Fondos/ferreteria6.jpg') }}");
-            min-height: 100vh;
-            background-size: contain;
-            background-repeat: repeat-y;
-
-       }
-       .pricing-header{
-        color: antiquewhite;
-       }
-    </style>
-
-
-
-
-    <header>
+<header class="store-header">
+    <div class="top-line">
         <div class="container">
-            <div class="row align-items-stretch justify-content-between">
-                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                    <a class="navbar-brand" href="{{ url('/index') }}">Ferreteria El Gypsum <i class="fa-solid fa-toilet" style="color: #74C0FC;"></i></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+            <span><i class="fa-solid fa-faucet-drip"></i> Categoria Plomeria</span>
+            <span><i class="fa-solid fa-ruler-combined"></i> Escoge marca, medida y precio correcto</span>
+        </div>
+    </div>
+
+    <nav class="catalog-nav">
+        <div class="container">
+            <a class="brand" href="{{ url('/') }}">
+                <span><i class="fa-solid fa-faucet-drip"></i></span>
+                Ferreteria El Gypsum
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ url('/') }}">Inicio</a>
+                <a class="active" href="{{ url('/plumb') }}">Plomeria</a>
+                <a href="{{ url('/energy') }}">Electricidad</a>
+                <a href="{{ url('/bano') }}">Baño</a>
+                <a href="{{ url('/plumb') }}">Plomeria</a>
+                <a href="{{ url('/compra') }}">Compra</a>
+            </div>
+
+            <div class="dropdown" id="carrito">
+                <button class="cart-button dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-cart-shopping"></i> Carrito
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-right cart-dropdown">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-2" id="lista-carrito">
+                            <thead>
+                                <tr>
+                                    <th>Img</th>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <button id="vaciar-carrito" class="btn btn-outline-danger btn-sm btn-block" type="button">
+                        Vaciar carrito
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <img src="{{ asset('img/cart.jpeg') }}" class="nav-link dropdown-toggle img-fluid" height="70px"
-                                    width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false"></img>
-                                <div id="carrito" class="dropdown-menu" aria-labelledby="navbarCollapse">
-                                    <table id="lista-carrito" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Imagen</th>
-                                                <th>Nombre</th>
-                                                <th>Precio</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
+                    <button id="procesar-pedido" class="btn btn-success btn-sm btn-block" type="button">
+                        Procesar compra
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
 
-                                    <a href="#" id="vaciar-carrito" class="btn btn-primary btn-block">Vaciar Carrito</a>
-                                    <a href="#" id="procesar-pedido" class="btn btn-danger btn-block">Procesar
-                                        Compra</a>
+<main id="lista-productos">
+    <section class="hero-plumbing">
+        <div class="container">
+            <div class="hero-content">
+                <span class="section-kicker"><i class="fa-solid fa-pipe-valve"></i> Plomeria</span>
+                <h1>Conexiones, tubos y accesorios con medidas reales.</h1>
+                <p>Selecciona la marca y presentacion del producto. El precio, stock y carrito se actualizan automaticamente.</p>
+                <a class="btn-primary-store" href="#productos">
+                    Ver productos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="productos" class="catalog-section">
+        <div class="container">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker"><i class="fa-solid fa-layer-group"></i> Catalogo de plomeria</span>
+                    <h2>Productos de plomeria</h2>
+                    <p>Un card por producto, con variantes por marca y medida desde la base de datos.</p>
+                </div>
+
+                <a class="btn-outline-store" href="{{ url('/') }}">
+                    <i class="fa-solid fa-house"></i> Volver al inicio
+                </a>
+            </div>
+
+            <div class="product-grid">
+                @forelse ($productos as $producto)
+                    @php
+                        $image = $producto->image
+                            ? asset('storage/' . $producto->image)
+                            : asset('Fondos/ferreteria6.jpg');
+
+                        $variantes = $producto->variants->map(function ($variant) use ($producto, $image) {
+                            $brand = optional($variant->brand)->name ?? 'Sin marca';
+                            $presentation = $variant->presentation ?: 'Sin medida';
+
+                            return [
+                                'id' => $variant->id,
+                                'brand' => $brand,
+                                'presentation' => $presentation,
+                                'label' => $brand . ' - ' . $presentation,
+                                'price' => number_format($variant->price, 2, '.', ''),
+                                'stock' => (int) $variant->stock,
+                                'sku' => $variant->sku ?? 'N/A',
+                                'title' => $producto->name . ' - ' . $brand . ' - ' . $presentation,
+                                'image' => $image,
+                            ];
+                        })->values();
+
+                        $primera = $variantes->first();
+                    @endphp
+
+                    <article class="product-card" data-product-card>
+                        <a class="product-image" href="{{ $whatsapp }}">
+                            <img
+                                src="{{ $image }}"
+                                alt="{{ $producto->name }}"
+                                onerror="this.onerror=null; this.src='{{ asset('Fondos/ferreteria6.jpg') }}';"
+                            >
+                            <span class="product-badge">Plomeria</span>
+                        </a>
+
+                        <div class="product-info">
+                            <span class="product-category">{{ optional($producto->category)->name ?? 'Plomeria' }}</span>
+                            <h3>{{ $producto->name }}</h3>
+                            <p>{{ $producto->description ?? 'Producto disponible en diferentes marcas y medidas. Selecciona una opcion para ver precio y stock.' }}</p>
+
+                            <label class="variant-label" for="variant-{{ $producto->id }}">Marca y medida</label>
+                            <select
+                                id="variant-{{ $producto->id }}"
+                                class="variant-select"
+                                data-variants='@json($variantes)'
+                            >
+                                @foreach ($producto->variants as $variant)
+                                    <option value="{{ $variant->id }}">
+                                        {{ optional($variant->brand)->name ?? 'Sin marca' }}
+                                        @if ($variant->presentation)
+                                            - {{ $variant->presentation }}
+                                        @else
+                                            - Sin medida
+                                        @endif
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <div class="variant-details">
+                                <div>
+                                    <span>Precio</span>
+                                    <strong class="variant-price">C$ {{ $primera['price'] ?? '0.00' }}</strong>
                                 </div>
-                            </li>
-                        </ul>
+                                <div>
+                                    <span>Stock</span>
+                                    <strong class="variant-stock">{{ $primera['stock'] ?? 0 }} disponible</strong>
+                                </div>
+                                <div>
+                                    <span>SKU</span>
+                                    <strong class="variant-sku">{{ $primera['sku'] ?? 'N/A' }}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-footer">
+                            <button
+                                type="button"
+                                class="add-cart-button agregar-carrito"
+                                data-id="{{ $primera['id'] ?? '' }}"
+                                data-titulo="{{ $primera['title'] ?? $producto->name }}"
+                                data-precio="{{ $primera['price'] ?? '0.00' }}"
+                                data-imagen="{{ $image }}"
+                            >
+                                Agregar al carrito
+                            </button>
+
+                            <a class="whatsapp-button" href="{{ $whatsapp }}" aria-label="Cotizar {{ $producto->name }}">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </article>
+                @empty
+                    <div class="empty-state">
+                        <i class="fa-solid fa-faucet-drip"></i>
+                        <h3>Aun no hay productos de plomeria</h3>
+                        <p>Cuando agregues productos activos con stock en la categoria Plomeria, apareceran automaticamente aqui.</p>
                     </div>
-                </nav>
+                @endforelse
             </div>
         </div>
-    </header>
-
-    <main>
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 my-4 mx-auto text-center">
-            <h1 class="display-4 mt-4">Lista de Productos</h1>
-            <p class="lead">Selecciona uno de nuestros productos y accede a un descuento</p>
-        </div>
-
-        <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Adaptador Hembra PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/ADAPTADOR-HEMBRA-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                            <li>2"</li>
-                            <li>3"</li>
-                            <li>4"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Adaptador Macho PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/ADAPTADOR-MACHO-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                            <li>2"</li>
-                            <li>3"</li>
-                            <li>4"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Codo Liso PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/CODO-PVC-AGUA-POTABLE-1-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Codo Mixto PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/CODO-PVC-AGUA-POTABLE-1-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tee Lisa PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TEE-PVC-POTABLE-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tee Mixta PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TEE-PVC-POTABLE-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-              <div class="container" id="lista-productos">
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tapo Macho PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TAPON-MACHO-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Union Lisa PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TAPON-HEMBRA-LISO-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Union Mixta PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/UNION-LISA-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-
-
-        </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tapon Hembra Liso PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TAPON-HEMBRA-LISO-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>1/2"</li>
-                            <li>3/4"</li>
-                            <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tapon Hembra con Rosca PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TAPON-HEMBRA-CON-ROSCA-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                             <li></li>
-                             <li>1/2"</li>
-                             <li>3/4"</li>
-                             <li>1"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Tee Sanitaria</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TEE-PVC-SANITARIA-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>2"</li>
-                            <li>3"</li>
-                            <li>4"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Trampa Sanitaria</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/TRAMPA-SANITARIA-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li></li>
-                            <li>2"</li>
-                            <li></li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Yee Sanitaria</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/YEE-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>3"</li>
-                            <li>4"</li>
-                            <li>2"</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Reductor PVC</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/REDUCTOR-PVC-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>3/4 a 1/2</li>
-                            <li>1 a 1/2</li>
-                            <li>4 a 3</li>
-                            <li>Todas las medidas</li>
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="card-deck mb-3 text-center">
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Terminal de Manguera Metalico</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/CONECTORES-PARA-MANGUERA-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>GRIVEN</li>
-                            <li>AQUAFINA</li>
-
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Terminal de Manguera Plastico</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/Terminal.jfif') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>TRUPER</li>
-                            <li>TOOLCRAFT</li>
-
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                    </div>
-                </div>
-
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-bold">Yee de Lavadora</h4>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('plomeria/CONECTOR-YEE-PARA-MANGUERA-AQUA-PLUS-300x300.jpg') }}" class="card-img-top">
-                        <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li></li>
-                            <li>AQUAPLUS</li>
-                            <li>GRIVEN</li>
-
-                        </ul>
-                        <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                    </div>
-                </div>
-
-
-            </div>
-
-  <div class="container" id="lista-productos">
-
-
-
-
-
-        <div class="card-deck mb-3 text-center">
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Manguera De Desague para Lavadora</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/LAVADORA-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Manguera Para Llenado de Lavadora</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/MANGUERA-FLEXIBLE-LAADORA-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Para Ducha</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/llave_ducha.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>AQUAFINA</li>
-                        <li>GRIVEN</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="card-deck mb-3 text-center">
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">LLave Pantry Doble Con Cuello Flexible</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('Plomeria/llave_doble_pantry.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li></li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Pantry Doble Negra Cuello Fijo</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/llave_pantry.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Pantry Doble Cuello Fijo</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/llave_pantry_sencilla.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="card-deck mb-3 text-center">
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Pantry Sencilla</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('Plomeria/LLAVE-DOBLE-METALICA-PARA-PANTRY-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Pantry Doble Acrilica</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/LLAVE-ACRILICA-DOBLE-PARA-PANTRY-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Pantry Doble Manija</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/LLAVE-PARA-PANTRY-MANIJA-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                </div>
-            </div>
-
-
-        </div>
-
-  <div class="container" id="lista-productos">
-    </div>
-
-        <div class="card-deck mb-3 text-center">
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Abasto para Pantry/Lavamano Doble</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/LLAVE-ABASTO-ANGULAR-DOBLE.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>TOOLCRAFT</li>
-                        <li>GRIVEN</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="1">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave Abasto para Panntry/Lavamano Sencilla</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/llave_recta.png') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>TOOLCRAFT</li>
-                        <li>GRIVEN</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="2">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave para Lavamanos Cruzeta</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/LLAVE-CRUZETA-LAAMANOS-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>AQUAFINA</li>
-                        <li>GRIVEN</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="3">Comprar</a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="card-deck mb-3 text-center">
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">LLave para Lavamanos</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/LLAVE-DOBLE-LAVAMANOS-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="4">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Llave para Lavamano T</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/LLAVE-T.CRUZ-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="5">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Manguera Para Lavamano/Pantry</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/MANGUERA-LAVABO-FREGADERO-VINIL-COFLEX-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>COFLEX</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="6">Comprar</a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="card-deck mb-3 text-center">
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Manguera de Patio</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('Plomeria/manguera_regar.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>25 fts (7.5 mts)</li>
-                        <li>50 fts (15 mts)</li>
-                        <li>75 fts (22.5 mts)</li>
-                        <li>100 fts (30 mts)</li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="7">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Pistola Para Riego de 5 funciones</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/PISTOLA-5-FUNCIONES-PARA-RIEGO-GRIVEN-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>AQUAFINA</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="8">Comprar</a>
-                </div>
-            </div>
-
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-bold">Pistola Metalica Para Riego</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{{ asset('plomeria/PISTOLA-METALICA-PARA-RIEGO-TRUPER-300x300.jpg') }}" class="card-img-top">
-                    <h1 class="card-title pricing-card-title precio"><span class="">Disponible</span></h1>
-
-
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li></li>
-                        <li>GRIVEN</li>
-                        <li>TOOLCRAFT</li>
-                        <li></li>
-                    </ul>
-                    <a href="" class="btn btn-block btn-primary agregar-carrito" data-id="9">Comprar</a>
-                </div>
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-
-
-
-
-    </div>
-
-
-    </main>
-
-    <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('js/sweetalert2.min.js')}}"></script>
-    <script src="{{ asset('js/carrito.js')}}"></script>
-    <script src="{{ asset('js/pedido.js')}}"></script>
-
+    </section>
+</main>
+
+<script>
+    const whatsappBase = @json($whatsapp);
+
+    function updateVariantCard(card) {
+        const select = card.querySelector('.variant-select');
+        const price = card.querySelector('.variant-price');
+        const stock = card.querySelector('.variant-stock');
+        const sku = card.querySelector('.variant-sku');
+        const addButton = card.querySelector('.agregar-carrito');
+        const whatsapp = card.querySelector('.whatsapp-button');
+
+        const variants = JSON.parse(select.dataset.variants || '[]');
+        const selected = variants.find(variant => String(variant.id) === String(select.value));
+
+        if (!selected) return;
+
+        price.textContent = 'C$ ' + selected.price;
+        stock.textContent = selected.stock + ' disponible';
+        sku.textContent = selected.sku || 'N/A';
+
+        addButton.dataset.id = selected.id;
+        addButton.dataset.titulo = selected.title;
+        addButton.dataset.precio = selected.price;
+        addButton.dataset.imagen = selected.image;
+
+        const message = `Hola, quiero cotizar: ${selected.title}. Precio mostrado: C$ ${selected.price}. SKU: ${selected.sku || 'N/A'}`;
+        whatsapp.href = whatsappBase + '?text=' + encodeURIComponent(message);
+    }
+
+    document.querySelectorAll('[data-product-card]').forEach(card => {
+        updateVariantCard(card);
+
+        const select = card.querySelector('.variant-select');
+        select.addEventListener('change', () => updateVariantCard(card));
+    });
+</script>
+
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('js/carrito.js') }}"></script>
+<script src="{{ asset('js/pedido.js') }}"></script>
 </body>
-
 </html>

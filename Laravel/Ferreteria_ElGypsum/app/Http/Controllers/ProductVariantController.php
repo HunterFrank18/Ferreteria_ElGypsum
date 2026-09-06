@@ -28,6 +28,7 @@ class ProductVariantController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'brand_id' => 'required|exists:brands,id',
+            'presentation' => 'nullable|string|max:100',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'sku' => 'nullable'
@@ -53,6 +54,7 @@ class ProductVariantController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'brand_id' => 'required|exists:brands,id',
+            'presentation' => 'nullable|string|max:100',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'sku' => 'nullable'

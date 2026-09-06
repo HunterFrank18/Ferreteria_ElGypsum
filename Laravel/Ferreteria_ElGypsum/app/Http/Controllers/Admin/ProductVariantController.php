@@ -10,10 +10,20 @@ use Illuminate\Http\Request;
 
 class ProductVariantController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $variants = ProductVariant::with(['product','brand'])->latest()->paginate(10);
-        return view('admin.variants.index', compact('variants'));
+        $productId = $request->product_id;
+
+        $query = ProductVariant::with(['product','brand'])->latest();
+
+        if ($productId) {
+            $query->where('product_id', $productId);
+        }
+
+        $variants = $query->paginate(10)->withQueryString();
+        $products = Product::all();
+
+        return view('admin.variants.index', compact('variants','products','productId'));
     }
 
     public function create()
@@ -28,6 +38,7 @@ class ProductVariantController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'brand_id' => 'required|exists:brands,id',
+            'color' => 'nullable|string|max:100',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'sku' => 'nullable'
@@ -53,6 +64,7 @@ class ProductVariantController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'brand_id' => 'required|exists:brands,id',
+            'color' => 'nullable|string|max:100',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'sku' => 'nullable'

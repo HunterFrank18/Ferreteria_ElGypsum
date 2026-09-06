@@ -1,0 +1,271 @@
+:root {
+    --quote-brand: #f6b400;
+    --quote-dark: #111827;
+    --quote-muted: #697386;
+    --quote-line: #e4e8ef;
+    --quote-soft: #f5f7fa;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: #1f2933;
+    background: var(--quote-soft);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+.top-line {
+    color: #ffffff;
+    background: var(--quote-dark);
+    font-size: 14px;
+}
+
+.top-line .container {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.top-line span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quote-nav {
+    background: #ffffff;
+    border-bottom: 1px solid var(--quote-line);
+}
+
+.quote-nav .container {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #111827;
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.brand span {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+    background: var(--quote-brand);
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+.back-link {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    color: #111827;
+    background: #fff7d6;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+.quote-hero {
+    color: #ffffff;
+    background-image: linear-gradient(90deg, rgba(17, 24, 39, .9), rgba(17, 24, 39, .58)), url("../Fondos/ferreteria18.jpg");
+    background-position: center;
+    background-size: cover;
+    padding: 58px 0;
+}
+
+.section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 7px 11px;
+    color: #111827;
+    background: var(--quote-brand);
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.quote-hero h1 {
+    max-width: 680px;
+    margin: 0 0 12px;
+    font-size: 42px;
+    line-height: 1.08;
+    font-weight: 900;
+}
+
+.quote-hero p {
+    max-width: 620px;
+    margin: 0;
+    color: rgba(255, 255, 255, .85);
+    font-size: 17px;
+    line-height: 1.55;
+}
+
+.quote-section {
+    padding: 42px 0;
+}
+
+.quote-panel {
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid var(--quote-line);
+    border-radius: 8px;
+    box-shadow: 0 18px 40px rgba(17, 24, 39, .08);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #111827;
+    font-weight: 900;
+}
+
+.form-control {
+    min-height: 46px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+.form-control:focus {
+    border-color: var(--quote-brand);
+    box-shadow: 0 0 0 3px rgba(246, 180, 0, .22);
+}
+
+.table-card {
+    overflow: hidden;
+    margin-bottom: 22px;
+    border: 1px solid var(--quote-line);
+    border-radius: 8px;
+}
+
+.table-card-header {
+    padding: 18px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--quote-line);
+}
+
+.table-card-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.table-card-header p {
+    margin: 4px 0 0;
+    color: var(--quote-muted);
+}
+
+.quote-table {
+    margin: 0;
+}
+
+.quote-table thead th {
+    color: #111827;
+    background: var(--quote-brand);
+    border-color: #e0a800;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.quote-table td,
+.quote-table th {
+    vertical-align: middle;
+}
+
+.quote-table img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    background: #ffffff;
+    border: 1px solid var(--quote-line);
+    border-radius: 6px;
+}
+
+.cantidad {
+    max-width: 90px;
+}
+
+.total-input {
+    width: 130px;
+    background: transparent;
+    color: #111827;
+    font-weight: 900;
+}
+
+#loaders img {
+    display: none;
+}
+
+.btn {
+    min-height: 44px;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+@media (max-width: 991px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .top-line .container,
+    .quote-nav .container {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .quote-hero h1 {
+        font-size: 34px;
+    }
+}
+
+@media (max-width: 575px) {
+    .quote-panel {
+        padding: 18px;
+    }
+
+    .quote-hero {
+        padding: 42px 0;
+    }
+
+    .quote-hero h1 {
+        font-size: 29px;
+    }
+}

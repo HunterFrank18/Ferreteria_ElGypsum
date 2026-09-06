@@ -79,4 +79,12 @@ class ClienteController extends Controller
         return redirect()->route('admin.clientes.index')
             ->with('success', 'Cliente eliminado');
     }
+    public function show($id)
+{
+    $cliente = \App\Models\Cliente::with([
+        'ventas.pagos'
+    ])->findOrFail($id);
+
+    return view('admin.clientes.show', compact('cliente'));
+}
 }

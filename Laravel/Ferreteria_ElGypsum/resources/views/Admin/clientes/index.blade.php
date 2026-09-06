@@ -67,6 +67,7 @@
               method="POST"
               class="d-inline">
 
+
             @csrf
             @method('DELETE')
 
@@ -75,6 +76,11 @@
             </button>
 
         </form>
+
+        <a href="{{ route('admin.clientes.show',$cliente->id) }}"
+                class="btn btn-info btn-sm">
+                Ver historial
+                </a>
 
     </td>
 

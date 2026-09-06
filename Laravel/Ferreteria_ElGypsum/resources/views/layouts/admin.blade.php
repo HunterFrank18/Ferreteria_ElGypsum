@@ -26,6 +26,10 @@ Panel de Administración
 Ir a la tienda
 </a>
 
+<a href="{{ route('admin.solicitudes.index') }}" class="btn btn-warning btn-sm">
+Solicitudes
+</a>
+
 </div>
 
 <li class="nav-item dropdown">
@@ -35,42 +39,33 @@ Ir a la tienda
 <i class="fas fa-bell"></i>
 
 <span class="badge badge-danger navbar-badge">
-{{ \App\Models\Product::where('stock','<=',5)->count() }}
+{{ \App\Models\Cliente::morosos()->count() }}
 </span>
 
 </a>
 
+
 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
 <span class="dropdown-item dropdown-header">
-Productos con stock bajo
+Clientes con deuda
 </span>
 
 <div class="dropdown-divider"></div>
 
-@foreach(\App\Models\Product::where('stock','<=',5)->take(5)->get() as $product)
+@foreach(\App\Models\Cliente::morosos()->take(5)->get() as $cliente)
 
-<a href="{{ route('admin.products.edit',$product->id) }}" class="dropdown-item">
+<a href="{{ route('admin.clientes.show',$cliente->id) }}"
+class="dropdown-item">
 
-<i class="fas fa-exclamation-triangle text-danger"></i>
-
-{{ $product->name }}
-
-<span class="float-right text-muted text-sm">
-Stock: {{ $product->stock }}
-</span>
+<i class="fas fa-user text-danger"></i>
+{{ $cliente->nombre }}
 
 </a>
 
 <div class="dropdown-divider"></div>
 
 @endforeach
-
-<a href="{{ route('admin.products.index') }}" class="dropdown-item dropdown-footer">
-
-Ver todos
-
-</a>
 
 </div>
 
@@ -115,7 +110,25 @@ form.submit();
 
 });
 
+<audio id="alertSound">
+    <source src="{{ asset('sounds/alert.mp3') }}" type="audio/mpeg">
+</audio>
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    let morosos = {{ \App\Models\Cliente::morosos()->count() }};
+
+    if(morosos > 0){
+        document.getElementById("alertSound").play();
+    }
+
+});
+
+
 </script>
+
+
 
 </body>
 

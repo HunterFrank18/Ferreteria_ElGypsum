@@ -39,4 +39,10 @@ public function pagos()
 {
     return $this->hasMany(Pago::class);
 }
+
+public function variante()
+{
+    return $this->belongsTo(ProductVariant::class, 'product_variant_id');
+}
+
 }
