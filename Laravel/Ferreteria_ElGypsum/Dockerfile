@@ -1,6 +1,21 @@
+# Etapa 1: compilar los assets (CSS/JS) con Node y Vite
+FROM node:20-alpine AS assets
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+# Etapa 2: imagen final de PHP + Nginx
 FROM richarvey/nginx-php-fpm:latest
 
 COPY . .
+
+# Copiamos los assets ya compilados desde la primera etapa
+COPY --from=assets /app/public/build ./public/build
 
 # Configuracion de la imagen
 ENV SKIP_COMPOSER 1
