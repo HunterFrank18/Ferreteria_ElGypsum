@@ -27,7 +27,7 @@
         <div class="container">
             <a class="brand" href="{{ url('/') }}">
                 <span><i class="fa-regular fa-lightbulb"></i></span>
-                Ferreteria El Ivan
+                Ferreteria El Gypsum
             </a>
 
             <div class="nav-links">
