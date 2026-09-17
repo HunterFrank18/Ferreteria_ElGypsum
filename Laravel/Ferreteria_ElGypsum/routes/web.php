@@ -16,6 +16,7 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Http\Controllers\Admin\UserRoleController;
 use Illuminate\Support\Facades\Route;
+Route::get('/debug-views', function () { return response()->json(scandir(resource_path('views/admin'))); });
 
 /*
 |--------------------------------------------------------------------------
